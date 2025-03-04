@@ -49,25 +49,62 @@
       margin-bottom: 16px;
     }
     
+    .grid-2-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    
     /* Card styles */
     .card {
       background-color: white;
       border-radius: 8px;
       padding: 16px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      height: 80px; /* Fixed height for KPI cards */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      /* Empty styling */
+      border: 1px solid #e2e8f0;
     }
     
-    /* Card placeholders */
-    .card-placeholder {
-      color: #94a3b8;
-      font-size: 12px;
+    /* KPI card (small) */
+    .kpi-card {
+      height: 80px; /* Fixed height for KPI cards */
+    }
+    
+    /* Chart card (large) */
+    .chart-card {
+      height: 160px; /* Fixed height for chart cards */
+    }
+    
+    /* Chart card title */
+    .chart-title {
+      font-size: 14px;
+      font-weight: bold;
+      margin: 0 0 12px 0;
+      color: #1e293b;
+    }
+    
+    /* Filter section */
+    .filter-section {
+      background-color: white;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .filter-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 0 0 12px 0;
       text-align: center;
+    }
+    
+    .filter-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: space-between;
+      min-height: 28px; /* Maintains some height for the filter container */
     }
   </style>
 </head>
@@ -82,16 +119,50 @@
     <!-- KPI Cards - 4 Column Grid with Empty Cards -->
     <div class="grid-4-col">
       <!-- Empty KPI Card 1 -->
-      <div class="card"></div>
+      <div class="card kpi-card"></div>
       
       <!-- Empty KPI Card 2 -->
-      <div class="card"></div>
+      <div class="card kpi-card"></div>
       
       <!-- Empty KPI Card 3 -->
-      <div class="card"></div>
+      <div class="card kpi-card"></div>
       
       <!-- Empty KPI Card 4 -->
-      <div class="card"></div>
+      <div class="card kpi-card"></div>
+    </div>
+    
+    <!-- Empty Filter Section -->
+    <div class="filter-section">
+      <h2 class="filter-title">Filters</h2>
+      <div class="filter-container">
+        <!-- Empty filter container for Tableau filters -->
+      </div>
+    </div>
+    
+    <!-- Chart Cards Row 1 - 2 Column Grid -->
+    <div class="grid-2-col">
+      <!-- Sales & Profit Trend Chart Card -->
+      <div class="card chart-card">
+        <h3 class="chart-title">Sales & Profit Trend</h3>
+      </div>
+      
+      <!-- Top Cities Chart Card -->
+      <div class="card chart-card">
+        <h3 class="chart-title">Top Cities by Profit</h3>
+      </div>
+    </div>
+    
+    <!-- Chart Cards Row 2 - 2 Column Grid -->
+    <div class="grid-2-col">
+      <!-- Category Performance Chart Card -->
+      <div class="card chart-card">
+        <h3 class="chart-title">Category Performance</h3>
+      </div>
+      
+      <!-- Shipping Method Chart Card -->
+      <div class="card chart-card">
+        <h3 class="chart-title">Shipping Method Distribution</h3>
+      </div>
     </div>
   </div>
 </body>
