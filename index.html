@@ -15,6 +15,7 @@
     .dashboard-container {
       max-width: 1200px;
       margin: 0 auto;
+      box-sizing: border-box; /* Ensures padding doesn't add to width */
     }
     
     /* Header block */
@@ -51,9 +52,11 @@
     
     .grid-2-col {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(578px, 1fr));
       gap: 16px;
       margin-bottom: 16px;
+      max-width: 100%;
+      overflow-x: auto; /* In case the fixed widths exceed container */
     }
     
     /* Card styles */
@@ -72,7 +75,9 @@
     
     /* Chart card (large) */
     .chart-card {
-      height: 160px; /* Fixed height for chart cards */
+      height: 283px; /* Adjusted to match Tableau height requirement */
+      width: 100%; /* Will fit container, and grid system will handle overall sizing */
+      box-sizing: border-box; /* Ensures padding doesn't add to width/height */
     }
     
     /* Chart card title */
