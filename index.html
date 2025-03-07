@@ -74,7 +74,14 @@
     height: 80px; /* Fixed height for KPI cards */
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
 }
-    
+        /* KPI card title */
+    .kpi-title {
+      font-family: Arial;
+      font-size: 14px;
+      font-weight: bold;
+      margin: 0 0 12px 0;
+      color: #1e293b;
+    }
     /* Chart card (large) */
     .chart-card {
       height: 283px; /* Adjusted to match Tableau height requirement */
@@ -89,6 +96,7 @@
       font-weight: bold;
       margin: 0 0 12px 0;
       color: #1e293b;
+      font-family: Arial;
       
     }
     
@@ -106,6 +114,8 @@
       font-weight: bold;
       margin: 0 0 12px 0;
       text-align: center;
+      font-family: Arial;
+      color: #1e293b;
     }
     
     .filter-container {
@@ -128,16 +138,26 @@
     <!-- KPI Cards - 4 Column Grid with Empty Cards -->
     <div class="grid-4-col">
       <!-- Empty KPI Card 1 -->
-      <div class="card kpi-card"></div>
+      <div class="card kpi-card">
+        <h3 class="kpi-title">Total Sales</h3>
+      </div>
+      
       
       <!-- Empty KPI Card 2 -->
-      <div class="card kpi-card"></div>
+      <div class="card kpi-card">
+        <h3 class="kpi-title">Total Profit</h3>
+      </div>
+      
       
       <!-- Empty KPI Card 3 -->
-      <div class="card kpi-card"></div>
+      <div class="card kpi-card">
+        <h3 class="kpi-title">Profit Margin</h3>
+      </div>
       
       <!-- Empty KPI Card 4 -->
-      <div class="card kpi-card"></div>
+      <div class="card kpi-card">
+        <h3 class="kpi-title">Top City</h3>
+      </div>
     </div>
     
     <!-- Empty Filter Section -->
