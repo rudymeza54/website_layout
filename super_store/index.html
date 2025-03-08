@@ -9,12 +9,14 @@
       margin: 0;
       padding: 16px;
       color: #1e293b;
+      background-color: #f1f5f9;
     }
     
     /* Dashboard container */
     .dashboard-container {
       max-width: 1200px;
       margin: 0 auto;
+      box-sizing: border-box; /* Ensures padding doesn't add to width */
     }
     
     /* Header block */
@@ -24,7 +26,7 @@
       padding: 16px;
       margin-bottom: 16px;
       color: white;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
     
     .header-title {
@@ -47,6 +49,17 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       margin-bottom: 16px;
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2); 
+    }
+    
+    .grid-2-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(578px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+      max-width: 100%;
+      overflow-x: auto; /* In case the fixed widths exceed container */
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2); 
     }
     
     /* Card styles */
@@ -54,20 +67,71 @@
       background-color: white;
       border-radius: 8px;
       padding: 16px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      height: 80px; /* Fixed height for KPI cards */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      /* Empty styling */
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e2e8f0;
+      transition: box-shadow 0.3s ease;
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2); 
     }
     
-    /* Card placeholders */
-    .card-placeholder {
-      color: #94a3b8;
+    .card:hover {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* KPI card (small) */
+    .kpi-card {
+      height: 80px; /* Fixed height for KPI cards */
+      position: relative;
+      overflow: hidden;
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2); 
+    }
+    
+    /* KPI title */
+    .kpi-title {
       font-size: 12px;
+      font-weight: medium;
+      color: #64748b;
+      margin: 0 0 8px 0;
+    }
+    
+    /* Chart card (large) */
+    .chart-card {
+      height: 283px; /* Adjusted to match Tableau height requirement */
+      width: 100%; /* Will fit container, and grid system will handle overall sizing */
+      box-sizing: border-box; /* Ensures padding doesn't add to width/height */
+      box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2); 
+    }
+    
+    /* Chart card title */
+    .chart-title {
+      font-size: 14px;
+      font-weight: bold;
+      margin: 0 0 12px 0;
+      color: #1e293b;
+      
+    }
+    
+    /* Filter section */
+    .filter-section {
+      background-color: white;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .filter-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 0 0 12px 0;
       text-align: center;
+    }
+    
+    .filter-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: space-between;
+      min-height: 28px; /* Maintains some height for the filter container */
     }
   </style>
 </head>
@@ -81,17 +145,59 @@
     
     <!-- KPI Cards - 4 Column Grid with Empty Cards -->
     <div class="grid-4-col">
-      <!-- Empty KPI Card 1 -->
-      <div class="card"></div>
+      <!-- KPI Card 1 with Title -->
+      <div class="card kpi-card">
+        <h4 class="kpi-title">Total Sales</h4>
+      </div>
       
-      <!-- Empty KPI Card 2 -->
-      <div class="card"></div>
+      <!-- KPI Card 2 with Title -->
+      <div class="card kpi-card">
+        <h4 class="kpi-title">Total Profit</h4>
+      </div>
       
-      <!-- Empty KPI Card 3 -->
-      <div class="card"></div>
+      <!-- KPI Card 3 with Title -->
+      <div class="card kpi-card">
+        <h4 class="kpi-title">Profit Margin</h4>
+      </div>
       
-      <!-- Empty KPI Card 4 -->
-      <div class="card"></div>
+      <!-- KPI Card 4 with Title -->
+      <div class="card kpi-card">
+        <h4 class="kpi-title">Top City</h4>
+      </div>
+    </div>
+    
+    <!-- Empty Filter Section -->
+    <div class="filter-section">
+      <h2 class="filter-title">Filters</h2>
+      <div class="filter-container">
+        <!-- Empty filter container for Tableau filters -->
+      </div>
+    </div>
+    
+    <!-- Chart Cards Row 1 - 2 Column Grid -->
+    <div class="grid-2-col">
+      <!-- Sales & Profit Trend Chart Card -->
+      <div class="card chart-card">
+        <h3 class="chart-title">Sales & Profit Trend</h3>
+      </div>
+      
+      <!-- Top Cities Chart Card -->
+      <div class="card chart-card">
+        <h3 class="chart-title">Top Cities by Profit</h3>
+      </div>
+    </div>
+    
+    <!-- Chart Cards Row 2 - 2 Column Grid -->
+    <div class="grid-2-col">
+      <!-- Category Performance Chart Card -->
+      <div class="card chart-card">
+        <h3 class="chart-title">Category Performance</h3>
+      </div>
+      
+      <!-- Shipping Method Chart Card -->
+      <div class="card chart-card">
+        <h3 class="chart-title">Shipping Method Distribution</h3>
+      </div>
     </div>
   </div>
 </body>
