@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Base styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f1f5f9;
+      margin: 0;
+      padding: 16px;
+      color: #1e293b;
+    }
+    
+    /* Dashboard container */
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* Header block */
+    .header-block {
+      background-color: #5b21b6;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+      text-align: center;
+    }
+    
+    .header-subtitle {
+      font-size: 14px;
+      color: #d8b4fe;
+      margin: 4px 0 0;
+      text-align: center;
+    }
+    
+    /* Grid layouts */
+    .grid-4-col {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    
+    /* Card styles */
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      height: 80px; /* Fixed height for KPI cards */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      /* Empty styling */
+    }
+    
+    /* Card placeholders */
+    .card-placeholder {
+      color: #94a3b8;
+      font-size: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Header Block -->
+    <div class="header-block">
+      <h1 class="header-title">SUPER STORE PERFORMANCE DASHBOARD</h1>
+      <p class="header-subtitle">Sales and profit analysis across regions, categories, and time</p>
+    </div>
+    
+    <!-- KPI Cards - 4 Column Grid with Empty Cards -->
+    <div class="grid-4-col">
+      <!-- Empty KPI Card 1 -->
+      <div class="card"></div>
+      
+      <!-- Empty KPI Card 2 -->
+      <div class="card"></div>
+      
+      <!-- Empty KPI Card 3 -->
+      <div class="card"></div>
+      
+      <!-- Empty KPI Card 4 -->
+      <div class="card"></div>
+    </div>
+  </div>
+</body>
+</html>
