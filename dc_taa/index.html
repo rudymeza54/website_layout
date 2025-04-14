@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USAF JKSA Currency Dashboard</title>
+    <!-- Add stylesheet references here -->
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: #1f2937;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #00308F;
+        }
+        
+        .title-banner {
+            background-color: #00308F;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #d1d5db;
+            text-align: center;
+        }
+        
+        .filter-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #00308F;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .chart-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .chart-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .chart-title-line {
+            width: 4px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        /* Form elements */
+        select {
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            background-color: #f9fafb;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: #00308F;
+            box-shadow: 0 0 0 2px rgba(0, 48, 143, 0.2);
+        }
+        
+        button {
+            background-color: #00308F;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #002a80;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="background-color: #00308F; padding: 12px; border-radius: 8px;">
+                        <!-- Icon placeholder -->
+                        <span style="display: inline-block; width: 32px; height: 32px;"></span>
+                    </div>
+                    <div>
+                        <h1 style="margin: 0; font-size: 24px;">USAF JKSA Currency Dashboard</h1>
+                        <p style="margin: 5px 0 0 0; font-size: 14px; color: #d1d5db;">MTF vs TAA Workload Comparison | Travis AFB (DMIS 0014)</p>
+                    </div>
+                </div>
+                <!-- <div style="background-color: #00308F; padding: 8px; border-radius: 4px; font-size: 14px;">
+                    Last Updated: 31 Mar 2025
+                </div> -->
+            </div>
+        </div>
+        
+        <!-- Title Banner -->
+        <div class="title-banner">
+            <h2 style="margin: 0; font-size: 20px;">JKSA Currency Analysis for Mission Readiness</h2>
+        </div>
+        
+        <!-- Filter Section for Tableau Filters -->
+        <div class="filter-section">
+            <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <div>
+                    <h3 style="margin: 0; color: #4b5563;">Filters</h3>
+                </div>
+            </div>
+            <div id="tableau-filters" style="width: 100%; min-height: 60px; border: 1px dashed #ccc; display: flex; justify-content: center; align-items: center;">
+                <!-- Tableau filters will be embedded here -->
+                <div style="font-size: 14px; color: #6b7280;">Tableau Filters Area</div>
+            </div>
+        </div>
+        
+        <!-- KPI Cards Row -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px;">
+            <!-- MTF Currency KPI Card -->
+            <div style="background-color: white; padding: 24px; min-height: 300px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; position: relative; overflow: hidden; display: flex; flex-direction: column;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background-color: #00308F;"></div>
+                <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                    <div style="background-color: #e0e7ff; padding: 12px; border-radius: 50%; margin-right: 12px;">
+                        <div style="width: 24px; height: 24px; background-color: #00308F; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                            <span>M</span>
+                        </div>
+                    </div>
+                    <h3 style="margin: 0; font-size: 18px; color: #4b5563;">MTF Currency</h3>
+                </div>
+                <!-- Tableau KPI Embed Placeholder -->
+                <div class="mtf-kpi-placeholder" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px dashed #ccc; margin: 10px 0; padding: 20px;">
+                    <!-- Tableau KPI will be embedded here -->
+                    <div style="font-size: 14px; color: #6b7280;">Tableau MTF Currency KPI</div>
+                </div>
+                <div style="font-size: 14px; color: #6b7280; text-align: center;">of MTF workload is JKSA currency</div>
+            </div>
+            
+            <!-- TAA Currency KPI Card -->
+            <div style="background-color: white; padding: 24px; min-height: 300px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; position: relative; overflow: hidden; display: flex; flex-direction: column;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background-color: #0066CC;"></div>
+                <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                    <div style="background-color: #dbeafe; padding: 12px; border-radius: 50%; margin-right: 12px;">
+                        <div style="width: 24px; height: 24px; background-color: #0066CC; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                            <span>T</span>
+                        </div>
+                    </div>
+                    <h3 style="margin: 0; font-size: 18px; color: #4b5563;">TAA Currency</h3>
+                </div>
+                <!-- Tableau KPI Embed Placeholder -->
+                <div class="taa-kpi-placeholder" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px dashed #ccc; margin: 10px 0; padding: 20px;">
+                    <!-- Tableau KPI will be embedded here -->
+                    <div style="font-size: 14px; color: #6b7280;">Tableau TAA Currency KPI</div>
+                </div>
+                <div style="font-size: 14px; color: #6b7280; text-align: center;">of TAA workload is JKSA currency</div>
+            </div>
+            
+            <!-- JKSA Leakage KPI Card -->
+            <div style="background-color: white; padding: 24px; min-height: 300px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; position: relative; overflow: hidden; display: flex; flex-direction: column;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background-color: #DC3545;"></div>
+                <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                    <div style="background-color: #fee2e2; padding: 12px; border-radius: 50%; margin-right: 12px;">
+                        <div style="width: 24px; height: 24px; background-color: #DC3545; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                            <span>L</span>
+                        </div>
+                    </div>
+                    <h3 style="margin: 0; font-size: 18px; color: #4b5563;">JKSA Leakage</h3>
+                </div>
+                <!-- Tableau KPI Embed Placeholder -->
+                <div class="leakage-kpi-placeholder" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px dashed #ccc; margin: 10px 0; padding: 20px;">
+                    <!-- Tableau KPI will be embedded here -->
+                    <div style="font-size: 14px; color: #6b7280;">Tableau JKSA Leakage KPI</div>
+                </div>
+                <div style="font-size: 14px; color: #6b7280; text-align: center;">JKSA procedures leaked to network</div>
+            </div>
+        </div>
+        
+        <!-- Workload Comparison Chart Container -->
+        <div class="chart-container">
+            <div class="chart-title">
+                <div class="chart-title-line" style="background-color: #00308F;"></div>
+                <h3>JKSA Currency Workload Comparison</h3>
+            </div>
+            <div id="workload-comparison-chart" style="height: 350px; border: 1px dashed #ccc; display: flex; justify-content: center; align-items: center;">
+                <!-- Chart will be rendered here -->
+                <p>Workload Comparison Chart Placeholder</p>
+            </div>
+        </div>
+        
+        <!-- Anchor Codes Coverage Chart Container -->
+        <div class="chart-container">
+            <div class="chart-title">
+                <div class="chart-title-line" style="background-color: #0066CC;"></div>
+                <h3>Unique JKSA Anchor Codes Coverage</h3>
+            </div>
+            <div id="anchor-codes-chart" style="height: 350px; border: 1px dashed #ccc; display: flex; justify-content: center; align-items: center;">
+                <!-- Chart will be rendered here -->
+                <p>Anchor Codes Coverage Chart Placeholder</p>
+            </div>
+        </div>
+        
+        <!-- JKSA Leakage Chart Container -->
+        <div class="chart-container">
+            <div class="chart-title">
+                <div class="chart-title-line" style="background-color: #DC3545;"></div>
+                <h3>Monthly JKSA Workload Leakage (Travis)</h3>
+            </div>
+            <div id="leakage-chart" style="height: 300px; border: 1px dashed #ccc; display: flex; justify-content: center; align-items: center;">
+                <!-- Chart will be rendered here -->
+                <p>JKSA Leakage Chart Placeholder</p>
+            </div>
+        </div>
+        
+        <!-- Currency Percentage Comparison Grid -->
+        <div class="grid-container">
+            <div class="chart-container">
+                <div class="chart-title">
+                    <div class="chart-title-line" style="background-color: #6c757d;"></div>
+                    <h3>MTF vs TAA Currency Percentage by Specialty</h3>
+                </div>
+                <div id="currency-percentage-chart" style="height: 300px; border: 1px dashed #ccc; display: flex; justify-content: center; align-items: center;">
+                    <!-- Chart will be rendered here -->
+                    <p>Currency Percentage Chart Placeholder</p>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-title">
+                    <div class="chart-title-line" style="background-color: #6c757d;"></div>
+                    <h3>JKSA Workload Distribution</h3>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <h4 style="text-align: center; margin-bottom: 15px;">MTF</h4>
+                        <div id="mtf-distribution-chart" style="height: 200px; border: 1px dashed #ccc; display: flex; justify-content: center; align-items: center;">
+                            <!-- Chart will be rendered here -->
+                            <p>MTF Distribution Chart</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="text-align: center; margin-bottom: 15px;">TAA</h4>
+                        <div id="taa-distribution-chart" style="height: 200px; border: 1px dashed #ccc; display: flex; justify-content: center; align-items: center;">
+                            <!-- Chart will be rendered here -->
+                            <p>TAA Distribution Chart</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            USAF JKSA Currency Dashboard | For Official Use Only
+        </div>
+    </div>
+
+    <!-- JavaScript references would go here -->
+    <script>
+        // Placeholder for Tableau integration code
+        /* 
+        Example Tableau integration:
+        
+        function initViz() {
+            // Initialize main Tableau visualizations
+            var vizContainers = {
+                "mtfCurrency": document.querySelector('.mtf-kpi-placeholder'),
+                "taaCurrency": document.querySelector('.taa-kpi-placeholder'),
+                "jksaLeakage": document.querySelector('.leakage-kpi-placeholder'),
+                "workloadComparison": document.getElementById("workload-comparison-chart"),
+                "anchorCodes": document.getElementById("anchor-codes-chart"),
+                "leakageChart": document.getElementById("leakage-chart"),
+                "currencyPercentage": document.getElementById("currency-percentage-chart"),
+                "mtfDistribution": document.getElementById("mtf-distribution-chart"),
+                "taaDistribution": document.getElementById("taa-distribution-chart"),
+                "filters": document.getElementById("tableau-filters")
+            };
+            
+            // Your Tableau initialization code here
+        }
+        */
+    </script>
+    
+    <!-- Uncomment this when integrating with Tableau -->
+    <!-- <script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script> -->
+</body>
+</html>
