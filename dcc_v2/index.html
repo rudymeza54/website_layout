@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau Dashboard Template</title>
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #0055a4;
+            --accent: #ffd700;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --text: #f8f9fa;
+            --sidebar-width: 280px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f5;
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(to bottom, var(--primary), #001f3f);
+            color: var(--light);
+            height: 100vh;
+            position: fixed;
+            z-index: 100;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .sidebar-logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .sidebar-logo-text {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .sidebar-subtitle {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+        
+        .sidebar-filters {
+            padding: 20px;
+        }
+        
+        .filter-group {
+            margin-bottom: 24px;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .filter-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .filter-option {
+            margin-bottom: 15px;
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 51, 102, 0.3);
+            color: white;
+            font-size: 14px;
+        }
+        
+        .filter-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .filter-date {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 51, 102, 0.3);
+            color: white;
+            font-size: 14px;
+        }
+        
+        .filter-checkbox {
+            accent-color: var(--accent);
+            margin-right: 8px;
+        }
+        
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .filter-button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .apply-btn {
+            background-color: var(--accent);
+            color: var(--primary);
+            flex: 2;
+        }
+        
+        .reset-btn {
+            background-color: rgba(0, 51, 102, 0.5);
+            color: var(--light);
+            flex: 1;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .filter-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Main Content Styles */
+        .main-container {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+        }
+        
+        .dashboard-content {
+            padding: 20px;
+        }
+        
+        .dashboard-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dashboard-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .dashboard-subtitle {
+            margin: 5px 0 0;
+            font-size: 16px;
+            opacity: 0.8;
+        }
+        
+        .filter-indicator {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .filter-indicator::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .header-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .header-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-color: white;
+            mask-size: cover;
+            -webkit-mask-size: cover;
+        }
+        
+        .icon-refresh {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.65 6.35A8 8 0 1 0 19.73 14h-2.08A6 6 0 1 1 12 6c1.44 0 2.75.5 3.8 1.35L12 12h7V5l-1.35 1.35z'/%3E%3C/svg%3E");
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.65 6.35A8 8 0 1 0 19.73 14h-2.08A6 6 0 1 1 12 6c1.44 0 2.75.5 3.8 1.35L12 12h7V5l-1.35 1.35z'/%3E%3C/svg%3E");
+        }
+        
+        .icon-download {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z'/%3E%3C/svg%3E");
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z'/%3E%3C/svg%3E");
+        }
+        
+        .icon-fullscreen {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z'/%3E%3C/svg%3E");
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z'/%3E%3C/svg%3E");
+        }
+        
+        /* Card Styles */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+            min-height: 150px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card h3 {
+            margin: 0 0 10px;
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #333;
+        }
+        
+        .stat-placeholder {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #ccc;
+        }
+        
+        .stat-description {
+            font-size: 12px;
+            color: #777;
+        }
+        
+        .mtf {
+            border-top: 4px solid var(--warning);
+        }
+        
+        .leaked-codes {
+            border-top: 4px solid var(--danger);
+        }
+        
+        .unique-codes {
+            border-top: 4px solid var(--primary);
+        }
+        
+        .leakage-rate {
+            border-top: 4px solid var(--accent);
+        }
+        
+        /* Tableau Embedding Container */
+        .tableau-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .tableau-header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tableau-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #444;
+        }
+        
+        .tableau-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .tableau-action {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .tableau-action:hover {
+            background-color: #f5f5f5;
+            color: var(--primary);
+        }
+        
+        .tableau-content {
+            height: 400px;
+            position: relative;
+        }
+        
+        .tableau-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            color: #666;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .tableau-placeholder-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        .tableau-placeholder-text {
+            font-size: 16px;
+            max-width: 400px;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 240px;
+                transform: translateX(-240px);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-container {
+                margin-left: 0;
+                transition: margin-left 0.3s ease;
+            }
+            
+            .main-container.sidebar-active {
+                margin-left: 240px;
+            }
+            
+            .toggle-sidebar {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 101;
+                background-color: var(--primary);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar for Filters -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon"></div>
+                <div class="sidebar-logo-text">DCC Dashboard</div>
+            </div>
+            <div class="sidebar-subtitle">Filters</div>
+        </div>
+        
+        <div class="sidebar-filters">
+            <div class="filter-group">
+                <div class="filter-title">FY</div>
+                <!-- <div class="filter-option">
+                    <label class="filter-label">From</label>
+                    <input type="date" class="filter-date">
+                </div>
+                <div class="filter-option">
+                    <label class="filter-label">To</label>
+                    <input type="date" class="filter-date">
+                </div> -->
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-title">QTR</div>
+                <!-- <div class="filter-option">
+                    <label class="filter-label">From</label>
+                    <input type="date" class="filter-date">
+                </div>
+                <div class="filter-option">
+                    <label class="filter-label">To</label>
+                    <input type="date" class="filter-date">
+                </div> -->
+            </div>
+            
+            <div class="filter-group">
+                <div class="filter-title">Specialty</div>
+                <div class="filter-option">
+                    <!-- <select class="filter-select">
+                        <option value="">Select category</option>
+                        <option value="category1">Category 1</option>
+                        <option value="category2">Category 2</option>
+                        <option value="category3">Category 3</option>
+                    </select>
+                </div> -->
+            </div>
+            
+            <!-- <div class="filter-group">
+                <div class="filter-title">Metrics</div>
+                <div class="filter-option">
+                    <label class="filter-label">
+                        <input type="checkbox" class="filter-checkbox">
+                        Metric 1
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label class="filter-label">
+                        <input type="checkbox" class="filter-checkbox">
+                        Metric 2
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label class="filter-label">
+                        <input type="checkbox" class="filter-checkbox">
+                        Metric 3
+                    </label>
+                </div> -->
+            </div>
+            
+            <div class="filter-group">
+                <div class="filter-title">Provider</div>
+                <!-- <div class="filter-option">
+                    <label class="filter-label">From</label>
+                    <input type="date" class="filter-date">
+                </div>
+                <div class="filter-option">
+                    <label class="filter-label">To</label>
+                    <input type="date" class="filter-date">
+                </div> -->
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-title">MTF</div>
+                <!-- <div class="filter-option">
+                    <label class="filter-label">From</label>
+                    <input type="date" class="filter-date">
+                </div>
+                <div class="filter-option">
+                    <label class="filter-label">To</label>
+                    <input type="date" class="filter-date">
+                </div> -->
+            </div>
+        </div>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <div class="main-container">
+        <header class="dashboard-header">
+            <div>
+                <h1 class="dashboard-title">JKSA Currency Workload</h1>
+                <p class="dashboard-subtitle">JKSA Currency Analysis for Mission Readiness</p>
+                <!-- <div class="filter-indicator">Filtered: Last 30 days</div> -->
+            </div>
+            <!-- <div class="header-actions">
+                <button class="header-button">
+                    <i class="icon icon-refresh"></i>
+                    Refresh
+                </button>
+                <button class="header-button">
+                    <i class="icon icon-download"></i>
+                    Export
+                </button>
+                <button class="header-button">
+                    <i class="icon icon-fullscreen"></i>
+                    Full Screen
+                </button>
+            </div> -->
+        </header>
+        
+        <div class="dashboard-content">
+            <!-- KPI Cards Row -->
+            <div class="stats-container">
+                <div class="stat-card mtf">
+                    <h3></h3>
+                    <div class="stat-placeholder"></div>
+                    <div class="stat-description"></div>
+                </div>
+                
+                <div class="stat-card leaked-codes">
+                    <h3></h3>
+                    <div class="stat-placeholder"></div>
+                    <div class="stat-description"></div>
+                </div>
+                
+                <div class="stat-card unique-codes">
+                    <h3></h3>
+                    <div class="stat-placeholder"></div>
+                    <div class="stat-description"></div>
+                </div>
+                
+                <div class="stat-card leakage-rate">
+                    <h3></h3>
+                    <div class="stat-placeholder"></div>
+                    <div class="stat-description"></div>
+                </div>
+            </div>
+            
+            <!-- Main Tableau Visualization -->
+            <div class="tableau-container">
+                <div class="tableau-header">
+                    <div class="tableau-title">Leakage Over Time</div>
+                    <!-- <div class="tableau-actions">
+                        <button class="tableau-action">Weekly</button>
+                        <button class="tableau-action">Monthly</button>
+                        <button class="tableau-action">Yearly</button>
+                    </div> -->
+                </div>
+                <div class="tableau-content">
+                    <div class="tableau-placeholder">
+                        <div class="tableau-placeholder-icon">📊</div>
+                        <div class="tableau-placeholder-text">
+                            Tableau Visualization Embedding Area
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Two Column Tableau Visualizations -->
+            <div class="grid-container">
+                <div class="tableau-container">
+                    <div class="tableau-header">
+                        <div class="tableau-title">Anchor Codes by Specialty</div>
+                        <!-- <div class="tableau-actions">
+                            <button class="tableau-action">Details</button>
+                        </div> -->
+                    </div>
+                    <div class="tableau-content" style="height: 300px;">
+                        <div class="tableau-placeholder">
+                            <div class="tableau-placeholder-icon">📈</div>
+                            <div class="tableau-placeholder-text">
+                                Secondary Tableau View
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tableau-container">
+                    <div class="tableau-header">
+                        <div class="tableau-title">CPT Codes</div>
+                        <!-- <div class="tableau-actions">
+                            <button class="tableau-action">Details</button>
+                        </div> -->
+                    </div>
+                    <div class="tableau-content" style="height: 300px;">
+                        <div class="tableau-placeholder">
+                            <div class="tableau-placeholder-icon">🔍</div>
+                            <div class="tableau-placeholder-text">
+                                Distribution Tableau View
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Full Width Tableau Visualization -->
+            <!-- <div class="tableau-container">
+                <div class="tableau-header">
+                    <div class="tableau-title">Detailed Breakdown</div>
+                    <div class="tableau-actions">
+                        <button class="tableau-action">Filter</button>
+                        <button class="tableau-action">Export</button>
+                    </div>
+                </div>
+                <div class="tableau-content">
+                    <div class="tableau-placeholder">
+                        <div class="tableau-placeholder-icon">📋</div>
+                        <div class="tableau-placeholder-text">
+                            Detailed Tableau View
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    
+    <!-- Mobile Sidebar Toggle (shown only on small screens) -->
+    <button class="toggle-sidebar" style="display: none;">☰</button>
+    
+    <script>
+        // Simple script to toggle sidebar on mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.querySelector('.toggle-sidebar');
+            const sidebar = document.querySelector('.sidebar');
+            const mainContainer = document.querySelector('.main-container');
+            
+            if (toggleButton) {
+                toggleButton.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                    mainContainer.classList.toggle('sidebar-active');
+                });
+            }
+            
+            // Detect window size and show/hide toggle button
+            function checkWindowSize() {
+                if (window.innerWidth <= 992) {
+                    toggleButton.style.display = 'flex';
+                } else {
+                    toggleButton.style.display = 'none';
+                    sidebar.classList.remove('active');
+                    mainContainer.classList.remove('sidebar-active');
+                }
+            }
+            
+            // Initial check
+            checkWindowSize();
+            
+            // Listen for resize
+            window.addEventListener('resize', checkWindowSize);
+        });
+    </script>
+</body>
+</html>
