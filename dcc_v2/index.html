@@ -173,10 +173,15 @@
         .main-container {
             flex: 1;
             margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
         }
         
         .dashboard-content {
             padding: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 88px); /* Subtracting header height (68px) + padding (20px) */
         }
         
         .dashboard-header {
@@ -273,6 +278,7 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             margin-bottom: 20px;
+            width: 100%;
         }
         
         .stat-card {
@@ -285,6 +291,7 @@
             min-height: 150px;
             overflow: hidden;
             position: relative;
+            width: 100%;
         }
         
         .stat-card:hover {
@@ -342,6 +349,10 @@
             overflow: hidden;
             margin-bottom: 20px;
             position: relative;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .tableau-header {
@@ -380,8 +391,10 @@
         }
         
         .tableau-content {
-            height: 400px;
             position: relative;
+            width: 100%;
+            flex: 1;
+            min-height: 400px;
         }
         
         .tableau-placeholder {
@@ -415,7 +428,9 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 0;
+            width: 100%;
+            flex: 1;
         }
         
         /* Responsive Design */
@@ -432,11 +447,13 @@
             
             .main-container {
                 margin-left: 0;
+                width: 100%;
                 transition: margin-left 0.3s ease;
             }
             
             .main-container.sidebar-active {
                 margin-left: 240px;
+                width: calc(100% - 240px);
             }
             
             .toggle-sidebar {
@@ -488,84 +505,22 @@
         <div class="sidebar-filters">
             <div class="filter-group">
                 <div class="filter-title">FY</div>
-                <!-- <div class="filter-option">
-                    <label class="filter-label">From</label>
-                    <input type="date" class="filter-date">
-                </div>
-                <div class="filter-option">
-                    <label class="filter-label">To</label>
-                    <input type="date" class="filter-date">
-                </div> -->
             </div>
 
             <div class="filter-group">
                 <div class="filter-title">QTR</div>
-                <!-- <div class="filter-option">
-                    <label class="filter-label">From</label>
-                    <input type="date" class="filter-date">
-                </div>
-                <div class="filter-option">
-                    <label class="filter-label">To</label>
-                    <input type="date" class="filter-date">
-                </div> -->
             </div>
             
             <div class="filter-group">
                 <div class="filter-title">Specialty</div>
-                <div class="filter-option">
-                    <!-- <select class="filter-select">
-                        <option value="">Select category</option>
-                        <option value="category1">Category 1</option>
-                        <option value="category2">Category 2</option>
-                        <option value="category3">Category 3</option>
-                    </select>
-                </div> -->
-            </div>
-            
-            <!-- <div class="filter-group">
-                <div class="filter-title">Metrics</div>
-                <div class="filter-option">
-                    <label class="filter-label">
-                        <input type="checkbox" class="filter-checkbox">
-                        Metric 1
-                    </label>
-                </div>
-                <div class="filter-option">
-                    <label class="filter-label">
-                        <input type="checkbox" class="filter-checkbox">
-                        Metric 2
-                    </label>
-                </div>
-                <div class="filter-option">
-                    <label class="filter-label">
-                        <input type="checkbox" class="filter-checkbox">
-                        Metric 3
-                    </label>
-                </div> -->
             </div>
             
             <div class="filter-group">
                 <div class="filter-title">Provider</div>
-                <!-- <div class="filter-option">
-                    <label class="filter-label">From</label>
-                    <input type="date" class="filter-date">
-                </div>
-                <div class="filter-option">
-                    <label class="filter-label">To</label>
-                    <input type="date" class="filter-date">
-                </div> -->
             </div>
 
             <div class="filter-group">
                 <div class="filter-title">MTF</div>
-                <!-- <div class="filter-option">
-                    <label class="filter-label">From</label>
-                    <input type="date" class="filter-date">
-                </div>
-                <div class="filter-option">
-                    <label class="filter-label">To</label>
-                    <input type="date" class="filter-date">
-                </div> -->
             </div>
         </div>
     </aside>
@@ -576,22 +531,7 @@
             <div>
                 <h1 class="dashboard-title">JKSA Currency Workload</h1>
                 <p class="dashboard-subtitle">JKSA Currency Analysis for Mission Readiness</p>
-                <!-- <div class="filter-indicator">Filtered: Last 30 days</div> -->
             </div>
-            <!-- <div class="header-actions">
-                <button class="header-button">
-                    <i class="icon icon-refresh"></i>
-                    Refresh
-                </button>
-                <button class="header-button">
-                    <i class="icon icon-download"></i>
-                    Export
-                </button>
-                <button class="header-button">
-                    <i class="icon icon-fullscreen"></i>
-                    Full Screen
-                </button>
-            </div> -->
         </header>
         
         <div class="dashboard-content">
@@ -622,40 +562,17 @@
                 </div>
             </div>
             
-            <!-- Main Tableau Visualization -->
-            <div class="tableau-container">
-                <div class="tableau-header">
-                    <div class="tableau-title">Leakage Over Time</div>
-                    <!-- <div class="tableau-actions">
-                        <button class="tableau-action">Weekly</button>
-                        <button class="tableau-action">Monthly</button>
-                        <button class="tableau-action">Yearly</button>
-                    </div> -->
-                </div>
-                <div class="tableau-content">
-                    <div class="tableau-placeholder">
-                        <div class="tableau-placeholder-icon">📊</div>
-                        <div class="tableau-placeholder-text">
-                            Tableau Visualization Embedding Area
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
             <!-- Two Column Tableau Visualizations -->
             <div class="grid-container">
                 <div class="tableau-container">
                     <div class="tableau-header">
-                        <div class="tableau-title">Anchor Codes by Specialty</div>
-                        <!-- <div class="tableau-actions">
-                            <button class="tableau-action">Details</button>
-                        </div> -->
+                        <div class="tableau-title">Leakage Over Time</div>
                     </div>
-                    <div class="tableau-content" style="height: 300px;">
+                    <div class="tableau-content">
                         <div class="tableau-placeholder">
-                            <div class="tableau-placeholder-icon">📈</div>
+                            <div class="tableau-placeholder-icon">📊</div>
                             <div class="tableau-placeholder-text">
-                                Secondary Tableau View
+                                Leakage Trends Visualization
                             </div>
                         </div>
                     </div>
@@ -663,40 +580,18 @@
                 
                 <div class="tableau-container">
                     <div class="tableau-header">
-                        <div class="tableau-title">CPT Codes</div>
-                        <!-- <div class="tableau-actions">
-                            <button class="tableau-action">Details</button>
-                        </div> -->
+                        <div class="tableau-title">Specialty Distribution</div>
                     </div>
-                    <div class="tableau-content" style="height: 300px;">
+                    <div class="tableau-content">
                         <div class="tableau-placeholder">
-                            <div class="tableau-placeholder-icon">🔍</div>
+                            <div class="tableau-placeholder-icon">📈</div>
                             <div class="tableau-placeholder-text">
-                                Distribution Tableau View
+                                Specialty Data Visualization
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Full Width Tableau Visualization -->
-            <!-- <div class="tableau-container">
-                <div class="tableau-header">
-                    <div class="tableau-title">Detailed Breakdown</div>
-                    <div class="tableau-actions">
-                        <button class="tableau-action">Filter</button>
-                        <button class="tableau-action">Export</button>
-                    </div>
-                </div>
-                <div class="tableau-content">
-                    <div class="tableau-placeholder">
-                        <div class="tableau-placeholder-icon">📋</div>
-                        <div class="tableau-placeholder-text">
-                            Detailed Tableau View
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
     
